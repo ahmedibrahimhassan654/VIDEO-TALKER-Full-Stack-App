@@ -25,5 +25,5 @@ io.on('connection', (socket) =>
 {
   socket.emit('connection', null)
   console.log('new user connected');
-  console.log(socket.io);
+   console.log(socket.id);
 })
