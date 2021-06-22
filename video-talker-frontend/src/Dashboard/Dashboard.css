@@ -21,7 +21,7 @@
   height: 80%;
   display: flex;
   align-items: center;
-  background-color: ;
+
 }
 
 .dashboard_rooms_container {
@@ -47,7 +47,10 @@
 }
 
 .dashboard_active_users_list {
-  height: 80%
+  height: 80%;
+  
+
+
 }
 
 .dashboard_logo_container {
