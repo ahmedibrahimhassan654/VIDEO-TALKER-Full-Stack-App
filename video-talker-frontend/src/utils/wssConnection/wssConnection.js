@@ -15,3 +15,12 @@ export const connectWithWebSocket = () =>
     console.log(socket.id);
   })
 }
+
+
+export const registerNewUser = (username) => {
+  socket.emit('registered-new-user', {
+    username: username,
+    socketId: socket.id
+
+  });
+}
