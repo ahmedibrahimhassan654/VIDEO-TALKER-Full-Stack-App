@@ -4,6 +4,8 @@ import dashBoardReducer from './reducers/dashboardReducer'
 
 
 export default combineReducers({
-  dashboard:dashBoardReducer
+  dashboard: dashBoardReducer,
+
+
 })
 
