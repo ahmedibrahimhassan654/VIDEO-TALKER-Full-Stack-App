@@ -20,7 +20,8 @@ export const connectWithWebSocket = () =>
 export const registerNewUser = (username) => {
   socket.emit('registered-new-user', {
     username: username,
-    socketId: socket.id
+    socketId: socket.id,
+    
 
   });
 }
