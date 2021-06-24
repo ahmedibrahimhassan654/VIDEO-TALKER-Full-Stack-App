@@ -59,6 +59,13 @@ io.on('connection', (socket) =>
 		});
 
   })
+   socket.on('pre-Offer', (data) => {
+      console.log('pree-offer handled');
+      io.to(data.callee.socketId).emit('pre-Offer', {
+         callerUsername: data.caller.username,
+         callerSocketId:socket.id
+      })
+  })
 
 
 })

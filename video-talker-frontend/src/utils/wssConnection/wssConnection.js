@@ -6,6 +6,8 @@ import store from '../../store/store'
 
 import * as dashboardActions from '../../store/actions/dashboardActions'
 
+import * as webRTCHandler from '../webRTC/webRTCHandler'
+
 const SERVER = 'http://localhost:5000'
 
 const broadcastEventTypes = {
@@ -29,6 +31,11 @@ export const connectWithWebSocket = () =>
     handleBroadcastEvents(data)
 
   });
+   socket.on('pre-Offer', (data) => {
+   webRTCHandler.handlePreOffer(data)
+})
+   
+   
 }
 
 
@@ -39,6 +46,12 @@ export const registerNewUser = (username) => {
 
 
   });
+}
+
+
+//emitting event to server telated with direct call 
+export const sendPreOffer = (data) => {
+   socket.emit('pre-Offer', data);
 }
 
 const handleBroadcastEvents = (data) => {
