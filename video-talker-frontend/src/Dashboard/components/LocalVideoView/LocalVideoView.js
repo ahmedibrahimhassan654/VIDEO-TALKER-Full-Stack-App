@@ -2,16 +2,17 @@ import React, { useRef, useEffect } from 'react';
 
 const styles = {
   videoContainer: {
-    width: '150px',
-    height: '150px',
+    width: '200px',
+    height: '200px',
     borderRadius: '8px',
     position: 'absolute',
     top: '5%',
     right: '23%'
   },
-  videoElement: {
+   videoElement: {
     width: '100%',
-    height: '100%'
+      height: '100%',
+      top: '50%',
   }
 };
 
