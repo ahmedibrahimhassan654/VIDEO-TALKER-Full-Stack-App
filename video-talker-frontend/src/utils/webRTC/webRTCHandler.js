@@ -13,12 +13,21 @@ const defaultConstrains = {
   video: true,
   audio: true
 };
+const configuration = {
+ iceServers: [{
+   urls: 'stun:stun.l.google.com:13902'
+  }]
+ }
+
+let connectedUserSocketId;
+let peerConnection
 
 export const getLocalStream = () => {
   navigator.mediaDevices.getUserMedia(defaultConstrains)
     .then(stream => {
        store.dispatch(setLocalStream(stream));
-       store.dispatch(setCallState(callStates.CALL_AVAILABLE))
+     store.dispatch(setCallState(callStates.CALL_AVAILABLE))
+     createPeerConnection()
        
     })
     .catch(err => {
@@ -27,8 +36,25 @@ export const getLocalStream = () => {
     });
 }
    ;
-   let connectedUserSocketId;
+ 
+   const createPeerConnection = () => {
+     
+    peerConnection = new RTCPeerConnection(configuration)
 
+    const localStream = store.getState().call.localStream
+    
+    for (const track of localStream.getTrack()) {
+     peerConnection.addTrack(track,localStream)
+    }
+    peerConnection.ontrack = ({streams:[stream]})=>{
+     //dispatch remote stream in our store
+
+    }
+    peerConnection.onicecandidate = (event) => {
+     //dispatch remote stream in our store
+     
+    }
+    }
    export const callToOtherUser = (calleeDetails) => {
      connectedUserSocketId = calleeDetails.socketId;
      store.dispatch(setCallState(callStates.CALL_IN_PROGRESS));
@@ -39,7 +65,10 @@ export const getLocalStream = () => {
          username: store.getState().dashboard.username
        }
      });
-   };
+};
+   
+
+
    
 export const handlePreOffer = (data) => {
  if (checkIfCallIsPossible) {
@@ -104,6 +133,7 @@ export const handlePreOfferAnswer = (data) => {
    rejected: true,
    reason: rejectionReason
   }))
+  resetCallData()
  }
 }
 
