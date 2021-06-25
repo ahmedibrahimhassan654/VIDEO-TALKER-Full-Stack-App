@@ -16,7 +16,13 @@ const DirectCall = (props) => {
      
         {/* {   <CallRejectedDialog /> } */}
         
-        {callState === callStates.CALL_REQUESTED && <IncomingCallDialog callerUsername={callerUsername} />}
+        
+        {
+        callState === callStates.CALL_REQUESTED &&
+         <IncomingCallDialog 
+         callerUsername={callerUsername}
+          />
+          }
         
         {callingDialogeVisible && <CallingDialoge /> }
         

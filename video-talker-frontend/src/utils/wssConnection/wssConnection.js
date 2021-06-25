@@ -54,6 +54,11 @@ export const sendPreOffer = (data) => {
    socket.emit('pre-Offer', data);
 }
 
+export const sendPreOfferAnswer = (data) => {
+  socket.emit('pre-offer-answer', data);
+}
+
+
 const handleBroadcastEvents = (data) => {
   switch (data.event) {
     case broadcastEventTypes.ACTIVE_USERS:
