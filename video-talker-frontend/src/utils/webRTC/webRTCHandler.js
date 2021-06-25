@@ -1,5 +1,5 @@
 import store from '../../store/store';
-import { callStates, setCallState, setLocalStream ,setCallingDialogeVisible,setCallerUsername} from '../../store/actions/callActions';
+import { callStates, setCallState, setLocalStream ,setCallingDialogeVisible,setCallerUsername,setCallRejected} from '../../store/actions/callActions';
 import *  as wss from '../wssConnection/wssConnection'
 
 const preOfferAnswers = {
@@ -84,6 +84,10 @@ export const rejectIncomingCallRequest = () => {
 };
 
 export const handlePreOfferAnswer = (data) => {
+
+ store.dispatch(setCallingDialogeVisible(false));
+ 
+
  if (data.answer === preOfferAnswers.CALL_ACCEPTED) {
    // send webRTC Offer
   
@@ -95,7 +99,11 @@ export const handlePreOfferAnswer = (data) => {
   } else {
    rejectionReason =' call rejected by the calle'
   }
-  
+
+  store.dispatch(setCallRejected({
+   rejected: true,
+   reason: rejectionReason
+  }))
  }
 }
 
