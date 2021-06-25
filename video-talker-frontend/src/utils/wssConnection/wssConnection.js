@@ -31,9 +31,14 @@ export const connectWithWebSocket = () =>
     handleBroadcastEvents(data)
 
   });
+ //liseners related with direct call
    socket.on('pre-Offer', (data) => {
    webRTCHandler.handlePreOffer(data)
-})
+   })
+   
+ socket.on('pre-offer-answer', (data) => {
+    webRTCHandler.handlePreOfferAnswer(data)
+   })
    
    
 }

@@ -74,12 +74,30 @@ export const acceptIncomingCallRequest = () => {
 };
 
 export const rejectIncomingCallRequest = () => {
- resetCallData()
+
  wss.sendPreOfferAnswer({
   callerSocketId: connectedUserSocketId,
   answer: preOfferAnswers.CALL_REJECTED
-  })
+ })
+ 
+ resetCallData()
 };
+
+export const handlePreOfferAnswer = (data) => {
+ if (data.answer === preOfferAnswers.CALL_ACCEPTED) {
+   // send webRTC Offer
+  
+ } else {
+  let rejectionReason
+  if (data.answer === preOfferAnswers.CALL_NOT_AVAILABLE) {
+   rejectionReason = ' callee is not able to pick up the call right now';
+   
+  } else {
+   rejectionReason =' call rejected by the calle'
+  }
+  
+ }
+}
 
 export const resetCallData = () => {
  connectedUserSocketId = null;
