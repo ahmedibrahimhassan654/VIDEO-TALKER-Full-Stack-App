@@ -43,7 +43,7 @@ export const getLocalStream = () => {
 
     const localStream = store.getState().call.localStream
     
-    for (const track of localStream.getTrack()) {
+    for (const track of localStream.getTracks()) {
      peerConnection.addTrack(track,localStream)
     }
     peerConnection.ontrack = ({streams:[stream]})=>{
@@ -52,6 +52,7 @@ export const getLocalStream = () => {
     }
     peerConnection.onicecandidate = (event) => {
      //dispatch remote stream in our store
+     console.log('getting candidates from stun server');
      if (event.candidate) {
       wss.sendWebRTCCandidate({
        candidate: event.candidate,
@@ -59,6 +60,12 @@ export const getLocalStream = () => {
       })
      }
     }
+
+    peerConnection.onconnectionstatechange = (event) => {
+     if (peerConnection.connectionState === 'connected') {
+       console.log('succesfully connected with other peer');
+     }
+   };
     }
    export const callToOtherUser = (calleeDetails) => {
      connectedUserSocketId = calleeDetails.socketId;
@@ -170,7 +177,7 @@ export const handleAnswer = async(data) => {
 
 export const handleCandidate = async (data)=>{
  try {
-   
+   console.log('adding Ice Candidate');
    await peerConnection.addIceCandidate(data.candidate)
   } catch (err) {
     console.log('err occured when trying to add received ice candidate', err);

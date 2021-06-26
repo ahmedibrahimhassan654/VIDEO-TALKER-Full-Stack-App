@@ -81,7 +81,7 @@ export const sendWebRTCAnswer = (data) => {
 }
 
 export const sendWebRTCCandidate = (data) => {
- socket.emi('webRTC-candidate',data);
+ socket.emit('webRTC-candidate',data);
 }
 
 
