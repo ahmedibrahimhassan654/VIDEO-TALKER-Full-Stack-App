@@ -52,7 +52,12 @@ export const getLocalStream = () => {
     }
     peerConnection.onicecandidate = (event) => {
      //dispatch remote stream in our store
-     
+     if (event.candidate) {
+      wss.sendWebRTCCandidate({
+       candidate: event.candidate,
+       connectedUserSocketId:connectedUserSocketId
+      })
+     }
     }
     }
    export const callToOtherUser = (calleeDetails) => {
@@ -163,6 +168,14 @@ export const handleAnswer = async(data) => {
 }
 
 
+export const handleCandidate = async (data)=>{
+ try {
+   
+   await peerConnection.addIceCandidate(data.candidate)
+  } catch (err) {
+    console.log('err occured when trying to add received ice candidate', err);
+  }
+}
 export const resetCallData = () => {
  connectedUserSocketId = null;
  store.dispatch(setCallState(callStates.CALL_AVAILABLE))
