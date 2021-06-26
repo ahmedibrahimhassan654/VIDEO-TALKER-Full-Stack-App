@@ -150,7 +150,7 @@ const sendOffer=async ()=>{
 export const handleOffer = async (data) => {
   await peerConnection.setRemoteDescription(data.offer)
 
-  const answer = await peerConnection..createAnswer();
+  const answer = await peerConnection.createAnswer();
   await peerConnection.setLocalDescription(answer)
   wss.sendWebRTCAnswer({
    callerSocketId: connectedUserSocketId,
@@ -158,7 +158,9 @@ export const handleOffer = async (data) => {
   })
 }
 
-
+export const handleAnswer = async(data) => {
+ await peerConnection.setRemoteDescription(data.answer)
+}
 
 
 export const resetCallData = () => {
