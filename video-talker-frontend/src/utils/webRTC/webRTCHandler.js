@@ -119,7 +119,7 @@ export const handlePreOfferAnswer = (data) => {
 
  if (data.answer === preOfferAnswers.CALL_ACCEPTED) {
    // send webRTC Offer
-  
+   sendOffer()
  } else {
   let rejectionReason
   if (data.answer === preOfferAnswers.CALL_NOT_AVAILABLE) {
@@ -136,6 +136,30 @@ export const handlePreOfferAnswer = (data) => {
   resetCallData()
  }
 }
+
+const sendOffer=async ()=>{
+ const offer = await peerConnection.createOffer()
+ await peerConnection.setLocalDescription(offer)
+ wss.sendWebRTCOffer({
+  calleeSocketId: connectedUserSocketId,
+  offer: offer
+ })
+ 
+}
+
+export const handleOffer = async (data) => {
+  await peerConnection.setRemoteDescription(data.offer)
+
+  const answer = await peerConnection..createAnswer();
+  await peerConnection.setLocalDescription(answer)
+  wss.sendWebRTCAnswer({
+   callerSocketId: connectedUserSocketId,
+   answer:answer
+  })
+}
+
+
+
 
 export const resetCallData = () => {
  connectedUserSocketId = null;

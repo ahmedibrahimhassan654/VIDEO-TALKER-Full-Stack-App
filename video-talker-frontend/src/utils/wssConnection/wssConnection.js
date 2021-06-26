@@ -40,6 +40,9 @@ export const connectWithWebSocket = () =>
     webRTCHandler.handlePreOfferAnswer(data)
    })
    
+ socket.on('webRTC-offer', (data) => {
+  webRTCHandler.handleOffer(data)
+ })
    
 }
 
@@ -61,6 +64,15 @@ export const sendPreOffer = (data) => {
 
 export const sendPreOfferAnswer = (data) => {
   socket.emit('pre-offer-answer', data);
+}
+
+
+export const sendWebRTCOffer = (data) => {
+  socket.emit('webRTC-offer', data);
+}
+
+export const sendWebRTCAnswer = (data) => {
+ socket.emit('webRTC-answer', data);
 }
 
 
