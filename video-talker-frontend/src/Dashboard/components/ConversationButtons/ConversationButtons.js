@@ -1,7 +1,7 @@
 import React from 'react'
 import {MdCallEnd,MdMic,MdMicOff,MdVideocam,MdVideocamOff,MdVideoLabel,MdVideoCall,MdCamera} from 'react-icons/md'
 import ConversationButton from './ConversationButton'
-import {switchForScreenSharingStream} from '../../../utils/webRTC/webRTCHandler'
+import {hangUp, switchForScreenSharingStream} from '../../../utils/webRTC/webRTCHandler'
 const styles = {
    buttonContainer: {
       display: 'flex',
@@ -42,14 +42,16 @@ const ConversationButtons = (props) => {
    const handleScreenButtonSharingPressed = () => {
       switchForScreenSharingStream()
    }
-   
+   const handleHangUpButtonPreesed = () => {
+      hangUp()
+   }
    return (
       <div style={styles.buttonContainer}>
          <ConversationButton onClickHandler={handleMicButtonPressed}>
             {localMicrophoneEnabled ?<MdMic style={styles.icon}/>:<MdMicOff style={styles.icon}/>}
          </ConversationButton>
 
-         <ConversationButton>
+         <ConversationButton onClickHandler={handleHangUpButtonPreesed}>
             <MdCallEnd style={styles.icon}/>
          </ConversationButton>
 

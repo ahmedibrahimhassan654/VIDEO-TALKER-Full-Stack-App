@@ -30,7 +30,7 @@ export const setCallState = (callState) => {
       callState
    }
 };
-export const setCallingDialogeVisible = (visible)=>{
+export const setCallingDialogVisible = (visible)=>{
    return {
       type: CALL_SET_CALLING_DIALOGE_VISIBLE,
       visible
