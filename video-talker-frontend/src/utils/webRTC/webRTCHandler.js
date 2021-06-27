@@ -1,5 +1,5 @@
 import store from '../../store/store';
-import { callStates, setCallState, setLocalStream ,setCallingDialogeVisible,setCallerUsername,setCallRejected} from '../../store/actions/callActions';
+import { callStates, setCallState, setLocalStream ,setCallingDialogeVisible,setCallerUsername,setCallRejected,setRemoteStream} from '../../store/actions/callActions';
 import *  as wss from '../wssConnection/wssConnection'
 
 const preOfferAnswers = {
@@ -48,7 +48,7 @@ export const getLocalStream = () => {
     }
     peerConnection.ontrack = ({streams:[stream]})=>{
      //dispatch remote stream in our store
-
+    store.dispatch(setRemoteStream(stream))  
     }
     peerConnection.onicecandidate = (event) => {
      //dispatch remote stream in our store
@@ -111,7 +111,8 @@ export const acceptIncomingCallRequest = () => {
  wss.sendPreOfferAnswer({
   callerSocketId: connectedUserSocketId,
   answer: preOfferAnswers.CALL_ACCEPTED
-  })
+ })
+   store.dispatch(setCallState(callStates.CALL_IN_PROGRESS))
 };
 
 export const rejectIncomingCallRequest = () => {
