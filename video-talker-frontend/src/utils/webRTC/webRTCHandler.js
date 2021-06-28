@@ -207,12 +207,22 @@ export const hangUp = () => {
 };
 
 const resetCallDataAfterHangUp = () => {
+   if (store.getState().call.screenSharingActive) {
+      screenSharingStream.getTracks().forEach(track =>{ track.stop()})
+   }
+
    store.dispatch(resetCallDataState());
 
   peerConnection.close();
   peerConnection = null;
   createPeerConnection();
-  resetCallData();
+   resetCallData();
+   const localStream = store.getState().localStream
+   localStream.getVideoTracks()[0].enabled = true;
+   localStream.getAudioTracks()[0].enabled =true;
+  
+
+   
 };
 
 export const resetCallData = () => {
