@@ -14,7 +14,7 @@ export const CALL_SET_REMOTE_STREAM = 'CALL.SET_REMOTE_STREAM'
 export const CALL_SET_LOCAL_MICROPHONE_ENABLED = 'CALL.SET_LOCAL_MICROPHONE_ENABLED'
 export const CALL_SET_LOCAL_CAMERA_ENABLED = 'CALL.SET_LOCAL_CAMERA_ENABLED'
 export const CALL_SET_SCREEN_SHARING_ACTIVE = 'CALL.SET_SCREEN_SHARING_ACTIVE';
-
+export const CALL_RESEET_CALL_DATA='CALL.RESET_CALL_DATA'
 
 export const setLocalStream = (localStream) =>{
   return {
@@ -81,4 +81,10 @@ export const setScreenSharingActive = (active) => {
      type: CALL_SET_SCREEN_SHARING_ACTIVE,
      active
    };
+ }
+
+export const resetCallDataState = () => {
+   return {
+       type:CALL_RESEET_CALL_DATA
+    }
  }

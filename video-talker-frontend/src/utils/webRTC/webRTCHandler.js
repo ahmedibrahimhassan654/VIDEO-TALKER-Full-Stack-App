@@ -1,5 +1,5 @@
 import store from '../../store/store';
-import { setLocalStream, setCallState, callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream, setScreenSharingActive } from '../../store/actions/callActions';
+import { setLocalStream, setCallState, callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream, setScreenSharingActive, resetCallDataState } from '../../store/actions/callActions';
 import * as wss from '../wssConnection/wssConnection';
 
 const preOfferAnswers = {
@@ -207,7 +207,7 @@ export const hangUp = () => {
 };
 
 const resetCallDataAfterHangUp = () => {
-  store.dispatch(setRemoteStream(null));
+   store.dispatch(resetCallDataState());
 
   peerConnection.close();
   peerConnection = null;
