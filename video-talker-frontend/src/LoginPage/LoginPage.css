@@ -33,7 +33,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #8706f0;
+  color: black;
+  font-size: 26px;
 }
 
 .login-page_input_container {

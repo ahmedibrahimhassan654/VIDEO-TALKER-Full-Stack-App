@@ -23,20 +23,22 @@ import './ActiveUsersList.css';
 // ];
 
 
-const ActiveUserList = ({activeUsers}) => {
+const ActiveUserList = ({activeUsers ,callState}) => {
   return (
 		<div className="active_user_list_container">
 			{activeUsers.map((activeUser) => (
         <ActiveUserListItem
           key={activeUser.socketId}
-          activeUser={activeUser}
+     activeUser={activeUser}
+     callState={callState}
         />
 			))}
 		</div>
   );
 }
 
-const mapStateToProps = ({dashboard}) => ({
-    ...dashboard
+const mapStateToProps = ({dashboard,call}) => ({
+ ...dashboard,
+ ...call
 })
 export default connect(mapStateToProps) (ActiveUserList)

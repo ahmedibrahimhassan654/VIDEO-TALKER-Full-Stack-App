@@ -1,5 +1,6 @@
 import React, { useState}from 'react'
 import logo from '../resources/logo.png'
+import logo2 from '../resources/logo2.jpg'
 import UsernameInput from './components/Usernameinput'
 import SubmitButton from './components/SubmitButton'
 import { useHistory } from 'react-router-dom'

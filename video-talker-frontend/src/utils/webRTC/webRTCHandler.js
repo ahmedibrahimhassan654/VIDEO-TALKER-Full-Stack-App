@@ -217,7 +217,7 @@ const resetCallDataAfterHangUp = () => {
   peerConnection = null;
   createPeerConnection();
    resetCallData();
-   const localStream = store.getState().localStream
+   const localStream = store.getState().call.localStream
    localStream.getVideoTracks()[0].enabled = true;
    localStream.getAudioTracks()[0].enabled =true;
   
