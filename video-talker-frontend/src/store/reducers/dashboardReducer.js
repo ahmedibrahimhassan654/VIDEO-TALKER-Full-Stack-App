@@ -1,12 +1,12 @@
-import * as dashboardActions from '../actions/dashboardActions'
+import * as dashboardActions from '../actions/dashboardActions';
 
 const initState = {
   username: '',
-  activeUsers:[]
-}
+  activeUsers: [],
+  groupCallRooms: []
+};
 
-const reducer = (state = initState, action) =>
-{
+const reducer = (state = initState, action) => {
   switch (action.type) {
     case dashboardActions.DASHBOARD_SET_USERNAME:
       return {
@@ -16,11 +16,17 @@ const reducer = (state = initState, action) =>
     case dashboardActions.DASHBOARD_SET_ACTIVE_USERS:
       return {
         ...state,
-        activeUsers:action.activeUsers
-      }
+        activeUsers: action.activeUsers
+      };
+    case dashboardActions.DASHBOARD_SET_GROUP_CALL_ROOMS:
+      return {
+        ...state,
+        groupCallRooms: action.groupCallRooms
+      };
     default:
-     return state
+      return state;
   }
 }
+;
 
-export default reducer
+export default reducer;

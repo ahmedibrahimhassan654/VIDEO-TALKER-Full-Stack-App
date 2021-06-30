@@ -28,19 +28,3 @@
 .active_user_list_image {
   width: 100%;
 }
-.button calluser {
-   font-size: 16px;
-   letter-spacing: 2px;
-   font-weight: 400 !important;
-   background-color: #e63946ff;
-   color: #fff;
-   padding: 23px 50px;
-   margin: auto;
-   text-align: center;
-   display: inline-block !important;
-   text-decoration: none;
-   border: 0px;
-   width: max-content;
-   cursor: pointer;
-   transition: all 0.3s 0s ease-in-out;
-}

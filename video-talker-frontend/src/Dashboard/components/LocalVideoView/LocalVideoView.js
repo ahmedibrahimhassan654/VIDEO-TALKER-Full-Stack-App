@@ -1,19 +1,19 @@
 import React, { useRef, useEffect } from 'react';
 
 const styles = {
-   videoContainer: {
-     width: '150px',
-     height: '150px',
-     borderRadius: '8px',
-     position: 'absolute',
-     top: '5%',
-     right: '23%'
-   },
-   videoElement: {
-     width: '100%',
-     height: '100%'
-   }
- };
+  videoContainer: {
+    width: '150px',
+    height: '150px',
+    borderRadius: '8px',
+    position: 'absolute',
+    top: '5%',
+    right: '23%'
+  },
+  videoElement: {
+    width: '100%',
+    height: '100%'
+  }
+};
 
 const LocalVideoView = props => {
   const { localStream } = props;
@@ -32,7 +32,7 @@ const LocalVideoView = props => {
 
   return (
     <div style={styles.videoContainer} className='background_secondary_color'>
-      <video controls  style={styles.videoElement} ref={localVideoRef} autoPlay muted />
+      <video style={styles.videoElement} ref={localVideoRef} autoPlay muted />
     </div>
   );
 };

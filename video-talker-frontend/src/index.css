@@ -20,17 +20,17 @@ code {
 }
 
 .background_main_color {
-  background-color:#231a4f ;
+  background-color: #8a85ff;
 }
 
 .background_secondary_color {
-  background-color: #34495E
+  background-color: #282C34;
 }
 
 .text_main_color {
-  color: rgb(248, 248, 250);
+  color: #e6e5e8;
 }
 
 .text_secondary_color {
-  color: #F5E027;
+  color: #8a85ff;
 }
