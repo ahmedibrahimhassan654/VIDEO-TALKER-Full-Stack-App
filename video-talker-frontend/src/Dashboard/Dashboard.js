@@ -5,14 +5,21 @@ import DirectCall from './components/DirectCall/DirectCall'
 import DashboardInformation from './components/DashboardInformation/DashboardInformation'
 import * as webRTCHandler from '../utils/webRTC/webRTCHandler'
 import { connect}from 'react-redux'
-import './Dashboard.css'
+import axios from 'axios'
 import { callStates } from '../store/actions/callActions';
-
-
+import {setTurnServers} from '../utils/webRTC/TURN'
+import './Dashboard.css'
 const Dashboard = ({username,callState}) => {
 
-   useEffect(() => {
-      webRTCHandler.getLocalStream()
+ useEffect(() => {
+  axios.get('http://localhost:5000/api/get-turn-credentials')
+   .then(responseData => {
+    console.log(responseData);
+    setTurnServers(responseData.data.token.iceServers)
+    webRTCHandler.getLocalStream()
+    
+  })
+      
    }, [])
 
   return (
