@@ -32,8 +32,8 @@ const Dashboard = ({ username, callState }) => {
       <div className='dashboard_left_section'>
         <div className='dashboard_content_container'>
           <DirectCall />
-          <GroupCall />
-          {callState !== callStates.CALL_IN_PROGRESS && <DashboardInformation username={username} />}
+          <GroupCall />        
+           {callState !== callStates.CALL_IN_PROGRESS && <DashboardInformation username={username} />}
         </div>
         <div className='dashboard_rooms_container background_secondary_color'>
       {/* <GroupCallRoomsList /> */}
