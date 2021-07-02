@@ -7,24 +7,26 @@ import DirectCall from './components/DirectCall/DirectCall';
 import { connect } from 'react-redux';
 import DashboardInformation from './components/DashboardInformation/DashboardInformation';
 import { callStates } from '../store/actions/callActions';
-import {setTurnServers} from '../utils/webRTC/TURN'
-import axios from 'axios'
 import GroupCallRoomsList from './components/GroupCallRoomsList/GroupCallRoomsList';
 import GroupCall from './components/GroupCall/GroupCall';
+import axios from 'axios'
+import {setTurnServers} from '../utils/webRTC/TURN'
 
 import './Dashboard.css';
 
 const Dashboard = ({ username, callState }) => {
-  useEffect(() => {
-     axios.get('https://video-talker-v2.herokuapp.com/api/get-turn-credentials')
-   .then(responseData => {
-    console.log(responseData);
-    setTurnServers(responseData.data.token.iceServers)
-    webRTCHandler.getLocalStream()
+ useEffect(() => {
+  //     axios.get('https://video-talker-v2.herokuapp.com/api/get-turn-credentials')
+  //  .then(responseData => {
+  //   console.log(responseData);
+  //   setTurnServers(responseData.data.token.iceServers)
+  //   webRTCHandler.getLocalStream()
     
-   }).catch(err => {
-   console.log(err);
-  })
+  //  }).catch(err => {
+  //  console.log(err);
+  // })
+    webRTCHandler.getLocalStream();
+    webRTCGroupHandler.connectWithMyPeer();
   }, []);
 
   return (
