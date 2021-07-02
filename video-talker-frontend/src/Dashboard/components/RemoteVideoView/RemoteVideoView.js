@@ -28,7 +28,7 @@ const LocalVideoView = props => {
 
   return (
     <div style={styles.videoContainer}>
-      <video controls style={styles.videoElement} ref={remoteVideoRef} autoPlay />
+      <video style={styles.videoElement} ref={remoteVideoRef} autoPlay />
     </div>
   );
 };

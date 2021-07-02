@@ -7,8 +7,6 @@ import DirectCall from './components/DirectCall/DirectCall';
 import { connect } from 'react-redux';
 import DashboardInformation from './components/DashboardInformation/DashboardInformation';
 import { callStates } from '../store/actions/callActions';
-import axios from 'axios'
-import {setTurnServers} from '../utils/webRTC/TURN'
 import GroupCallRoomsList from './components/GroupCallRoomsList/GroupCallRoomsList';
 import GroupCall from './components/GroupCall/GroupCall';
 
@@ -16,15 +14,8 @@ import './Dashboard.css';
 
 const Dashboard = ({ username, callState }) => {
   useEffect(() => {
-   axios.get('https://video-talker-v2.herokuapp.com/api/get-turn-credentials')
-   .then(responseData => {
-    console.log(responseData);
-    setTurnServers(responseData.data.token.iceServers)
-    webRTCHandler.getLocalStream()
-    
-   }).catch(err => {
-   console.log(err);
-  })
+    webRTCHandler.getLocalStream();
+    webRTCGroupHandler.connectWithMyPeer();
   }, []);
 
   return (
@@ -32,12 +23,11 @@ const Dashboard = ({ username, callState }) => {
       <div className='dashboard_left_section'>
         <div className='dashboard_content_container'>
           <DirectCall />
-          <GroupCall />        
-           {callState !== callStates.CALL_IN_PROGRESS && <DashboardInformation username={username} />}
+          {/* <GroupCall /> */}
+          {callState !== callStates.CALL_IN_PROGRESS && <DashboardInformation username={username} />}
         </div>
         <div className='dashboard_rooms_container background_secondary_color'>
-      {/* <GroupCallRoomsList /> */}
-      rooms
+          {/* <GroupCallRoomsList /> */}
         </div>
       </div>
       <div className='dashboard_right_section background_secondary_color'>
