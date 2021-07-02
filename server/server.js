@@ -1,5 +1,6 @@
 const express = require('express');
 const socket = require('socket.io');
+require('dotenv').config();
 
 const twilio = require('twilio');
 
@@ -21,9 +22,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/get-turn-credentials', (req, res) => {
- const accountSid = 'AC9dff222e143c5a779e037c4420c6ee11';
- const authToken = '9ca6c7ffea0d8c45e93bbeeafa2aa480';
+ const accountSid = process.env.TWILIO_ACCOUNT_SID ;
+ const authToken = process.env.TWILIO_AUTH_TOKEN;
  const client = twilio(accountSid, authToken);
+
+ //console.log('Your environment variable TWILIO_ACCOUNT_SID has the value: ', process.env.TWILIO_ACCOUNT_SID);
  client.tokens.create().then(token => { res.send({ token }); }).catch(err => {
   console.log(err); 
  })
