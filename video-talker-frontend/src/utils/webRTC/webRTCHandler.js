@@ -16,11 +16,11 @@ const defaultConstrains = {
   audio: true
 };
 
-const configuration = {
-  iceServers: [{
-    urls: 'stun:stun.l.google.com:13902'
-  }]
-};
+// const configuration = {
+//   iceServers: [{
+//     urls: 'stun:stun.l.google.com:13902'
+//   }]
+// };
 
 let connectedUserSocketId;
 let peerConnection;
@@ -41,12 +41,31 @@ export const getLocalStream = () => {
 ;
 
 const createPeerConnection = () => {
- // const turnServers = getTurnServers();
- 
- // const configuration = {
- //  iceServers: [...turnServers, { url: "stun:stun.1und1.de:3478" }],
- //  iceTransportPolicy: 'relay',
- // };
+ const turnServers = getTurnServers();
+ //Obtaining TURN/STUN credentials using Xiysys
+ //Go to https://xirsys.com/
+ const configuration = {
+   iceServers: [
+    {   
+      urls: [ "stun:ws-turn2.xirsys.com" ]
+    }, 
+    {   
+      username: "t_VO8me276dgqoZlfgavYHrE7sWlpf7qyRdvY4kIJp9ZC56n8sDQ4jLJW1gHSG1mAAAAAGDgmvFBaG1lZGlicmFoaW0=",   
+     credential: "1de22850-dc22-11eb-99f2-0242ac140004",   
+      urls: [       
+       "turn:ws-turn2.xirsys.com:80?transport=udp",
+       "turn:ws-turn2.xirsys.com:3478?transport=udp",
+       "turn:ws-turn2.xirsys.com:80?transport=tcp",
+       "turn:ws-turn2.xirsys.com:3478?transport=tcp",
+       "turns:ws-turn2.xirsys.com:443?transport=tcp",
+       "turns:ws-turn2.xirsys.com:5349?transport=tcp"
+       ]
+     }
+   ]
+  // iceServers: [...turnServers,  { url: 'stun:stun.1und1.de:3478' }],
+
+  // iceTransportPolicy: 'relay'
+ };
   peerConnection = new RTCPeerConnection(configuration);
 
   const localStream = store.getState().call.localStream;

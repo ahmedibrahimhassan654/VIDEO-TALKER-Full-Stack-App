@@ -16,17 +16,19 @@ import './Dashboard.css';
 
 const Dashboard = ({ username, callState }) => {
  useEffect(() => {
-  //     axios.get('https://video-talker-v2.herokuapp.com/api/get-turn-credentials')
-  //  .then(responseData => {
-  //   console.log(responseData);
-  //   setTurnServers(responseData.data.token.iceServers)
-  //   webRTCHandler.getLocalStream()
+      axios.get('https://video-talker-v2.herokuapp.com/get-turn-credentials')
+      .then((responseData) => {
+       console.log(responseData);
+      setTurnServers(responseData.data.token.iceServers)
+     
     
-  //  }).catch(err => {
-  //  console.log(err);
-  // })
-    webRTCHandler.getLocalStream();
-    webRTCGroupHandler.connectWithMyPeer();
+   }).catch(err => {
+ console.log(err);
+   })
+   webRTCHandler.getLocalStream();
+      webRTCGroupHandler.connectWithMyPeer();
+    // webRTCHandler.getLocalStream();
+    // webRTCGroupHandler.connectWithMyPeer();
   }, []);
 
   return (

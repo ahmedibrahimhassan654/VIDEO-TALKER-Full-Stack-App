@@ -8,7 +8,8 @@ let groupCallRoomId;
 let groupCallHost = false;
 
 export const connectWithMyPeer = () => {
-  myPeer = new window.Peer(undefined, {
+ myPeer = new window.Peer(undefined, {
+
    config: {
    iceServers:[...getTurnServers(),{url: 'stun:stun.1und1.de:3478'}]
   }

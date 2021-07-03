@@ -5,7 +5,9 @@ const groupCallHandler = require('./groupCallHandler');
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
 const twilio = require('twilio');
-const cors=require('cors');
+
+const cors = require('cors');
+
 const PORT = process.env.PORT ||5000;
 
 const app = express();
@@ -18,15 +20,17 @@ app.get('/', (req, res) => {
  })
 })
 
-app.get('/api/get-turn-credentials', (req, res) => {
+app.get('/get-turn-credentials', (req, res) => {
  const accountSid = process.env.TWILIO_ACCOUNT_SID ;
  const authToken = process.env.TWILIO_AUTH_TOKEN;
  const client = twilio(accountSid, authToken);
 
- //console.log('Your environment variable TWILIO_ACCOUNT_SID has the value: ', process.env.TWILIO_ACCOUNT_SID);
- client.tokens.create().then(token => { res.send({ token }); }).catch(err => {
-  console.log(err); 
- })
+ // console.log('Your environment variable TWILIO_ACCOUNT_SID has the value: ', accountSid );
+ // console.log('Your environment variable TWILIO_AUTH_TOKEN has the value: ', authToken);
+
+ client.tokens.create().then((token) => { res.send({ token }); }).catch(err => { 
+res.send({error: err});
+}) 
  
 })
 

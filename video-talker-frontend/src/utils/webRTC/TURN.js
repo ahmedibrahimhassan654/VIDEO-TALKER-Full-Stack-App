@@ -6,5 +6,7 @@ export const getTurnServers = () => {
 
 
 export const setTurnServers = (servers) => {
- turnServers=servers;
+
+ turnServers = servers;
+ 
 }
