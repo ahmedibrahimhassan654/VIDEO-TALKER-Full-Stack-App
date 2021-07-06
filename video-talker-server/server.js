@@ -8,31 +8,38 @@ const twilio = require('twilio');
 
 const cors = require('cors');
 
-const PORT = process.env.PORT ||5000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 
 app.use(cors())
 
+
+
+
+
 app.get('/', (req, res) => {
- res.send({
-  api: 'video-talker-api'
- })
+  res.send({
+    api: 'video-talker-api'
+  })
 })
 
-app.get('/get-turn-credentials', (req, res) => {
- const accountSid = process.env.TWILIO_ACCOUNT_SID ;
- const authToken = process.env.TWILIO_AUTH_TOKEN;
- const client = twilio(accountSid, authToken);
+app.get('/api/get-turn-credentials', (req, res) => {
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  const client = twilio(accountSid, authToken);
 
- // console.log('Your environment variable TWILIO_ACCOUNT_SID has the value: ', accountSid );
- // console.log('Your environment variable TWILIO_AUTH_TOKEN has the value: ', authToken);
+  // console.log('Your environment variable TWILIO_ACCOUNT_SID has the value: ', accountSid );
+  // console.log('Your environment variable TWILIO_AUTH_TOKEN has the value: ', authToken);
 
- client.tokens.create().then((token) => { res.send({ token }); }).catch(err => { 
-res.send({error: err});
-}) 
- 
-})
+
+  try {
+    client.tokens.create().then((token) => res.send({ token }));
+  } catch (err) {
+    console.log(err);
+    res.send({ error: true, err });
+  }
+});
 
 const server = app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}`);
