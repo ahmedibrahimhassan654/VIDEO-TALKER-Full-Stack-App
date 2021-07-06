@@ -29,8 +29,8 @@ app.get('/api/get-turn-credentials', (req, res) => {
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   const client = twilio(accountSid, authToken);
 
-  // console.log('Your environment variable TWILIO_ACCOUNT_SID has the value: ', accountSid );
-  // console.log('Your environment variable TWILIO_AUTH_TOKEN has the value: ', authToken);
+  console.log('Your environment variable TWILIO_ACCOUNT_SID has the value: ', accountSid);
+  console.log('Your environment variable TWILIO_AUTH_TOKEN has the value: ', authToken);
 
 
   try {

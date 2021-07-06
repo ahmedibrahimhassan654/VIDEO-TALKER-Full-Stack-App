@@ -1,7 +1,7 @@
 import store from '../../store/store';
 import { setLocalStream, setCallState, callStates, setCallingDialogVisible, setCallerUsername, setCallRejected, setRemoteStream, setScreenSharingActive, resetCallDataState, setMessage } from '../../store/actions/callActions';
 import * as wss from '../wssConnection/wssConnection';
-import {getTurnServers} from '../../utils/webRTC/TURN'
+import { getTurnServers } from '../../utils/webRTC/TURN'
 const preOfferAnswers = {
   CALL_ACCEPTED: 'CALL_ACCEPTED',
   CALL_REJECTED: 'CALL_REJECTED',
@@ -38,34 +38,34 @@ export const getLocalStream = () => {
       console.log(err);
     });
 }
-;
+  ;
 
 const createPeerConnection = () => {
- const turnServers = getTurnServers();
- //Obtaining TURN/STUN credentials using Xiysys
- //Go to https://xirsys.com/
- const configuration = {
-   iceServers: [
-    {   
-      urls: [ "stun:ws-turn2.xirsys.com" ]
-    }, 
-    {   
-      username: "t_VO8me276dgqoZlfgavYHrE7sWlpf7qyRdvY4kIJp9ZC56n8sDQ4jLJW1gHSG1mAAAAAGDgmvFBaG1lZGlicmFoaW0=",   
-     credential: "1de22850-dc22-11eb-99f2-0242ac140004",   
-      urls: [       
-       "turn:ws-turn2.xirsys.com:80?transport=udp",
-       "turn:ws-turn2.xirsys.com:3478?transport=udp",
-       "turn:ws-turn2.xirsys.com:80?transport=tcp",
-       "turn:ws-turn2.xirsys.com:3478?transport=tcp",
-       "turns:ws-turn2.xirsys.com:443?transport=tcp",
-       "turns:ws-turn2.xirsys.com:5349?transport=tcp"
-       ]
-     }
-   ]
-  // iceServers: [...turnServers,  { url: 'stun:stun.1und1.de:3478' }],
+  const turnServers = getTurnServers();
+  //Obtaining TURN/STUN credentials using Xiysys
+  //Go to https://xirsys.com/
+  const configuration = {
+    //  iceServers: [
+    //   {   
+    //     urls: [ "stun:ws-turn2.xirsys.com" ]
+    //   }, 
+    //   {   
+    //     username: "t_VO8me276dgqoZlfgavYHrE7sWlpf7qyRdvY4kIJp9ZC56n8sDQ4jLJW1gHSG1mAAAAAGDgmvFBaG1lZGlicmFoaW0=",   
+    //    credential: "1de22850-dc22-11eb-99f2-0242ac140004",   
+    //     urls: [       
+    //      "turn:ws-turn2.xirsys.com:80?transport=udp",
+    //      "turn:ws-turn2.xirsys.com:3478?transport=udp",
+    //      "turn:ws-turn2.xirsys.com:80?transport=tcp",
+    //      "turn:ws-turn2.xirsys.com:3478?transport=tcp",
+    //      "turns:ws-turn2.xirsys.com:443?transport=tcp",
+    //      "turns:ws-turn2.xirsys.com:5349?transport=tcp"
+    //      ]
+    //    }
+    //  ]
+    iceServers: [...turnServers, { url: 'stun:stun.1und1.de:3478' }],
 
-  // iceTransportPolicy: 'relay'
- };
+    iceTransportPolicy: 'relay'
+  };
   peerConnection = new RTCPeerConnection(configuration);
 
   const localStream = store.getState().call.localStream;
@@ -211,7 +211,7 @@ export const handleCandidate = async (data) => {
 
 export const checkIfCallIsPossible = () => {
   if (store.getState().call.localStream === null ||
-  store.getState().call.callState !== callStates.CALL_AVAILABLE) {
+    store.getState().call.callState !== callStates.CALL_AVAILABLE) {
     return false;
   } else {
     return true;
@@ -240,7 +240,7 @@ export const switchForScreenSharingStream = async () => {
     screenSharingStream.getTracks().forEach(track => track.stop());
   }
 }
-;
+  ;
 
 export const handleUserHangedUp = () => {
   resetCallDataAfterHangUp();
@@ -281,4 +281,4 @@ export const resetCallData = () => {
 export const sendMessageUsingDataChannel = (message) => {
   dataChannel.send(message);
 }
-;
+  ;
